@@ -1,0 +1,56 @@
+    1  mkdir -p /root/mephi-linux-security-2026
+    2  groupadd students
+    3  getend group students
+    4  getent group students
+    5  useradd -m -u 1234 -g students -s /bin/bash user1
+    6  id
+    7  id user1 
+    8  passwd user1 
+    9  chage -M 90 user1 
+   10  chage -l user1 
+   11  cp /etc/passwd /root/mephi-linux-security-2026/passwd
+   12  cp /etc/shadow /root/mephi-linux-security-2026/shadow
+   13  cp /etc/group /root/mephi-linux-security-2026/group
+   14  grep '^user1:' /etc/passwd
+   15  grep '^user1:' /etc/shadow
+   16  grep '^user1:' /etc/group
+   17  find / -type f -perm -4000 -ls 2>/dev/null > /root/mephi-linux-security-2026/setuid-files.out
+   18  cat /root/mephi-linux-security-2026/setuid-files.out 
+   19  ps -eo pid,ruid,euid,user,ruser,comm
+   20  ps -eo pid,ruid,euid,user,ruser,comm | grep passwd
+   21  ps -eo pid,ruid,euid,user,ruser,comm | grep passwd > /root/mephi-linux-security-2026/processes-privileged.out
+   22  cat /root/mephi-linux-security-2026/processes-privileged.out 
+   23  whereis -b cat
+   24  cp /usr/bin/cat /home/user1/cat-setuid
+   25  chown root:students /home/user1/cat-setuid 
+   26  chmod 4755 /home/user1/cat-setuid 
+   27  ls -l /home/user1/cat-setuid 
+   28  stat /home/user1 > /root/mephi-linux-security-2026/stat.out
+   29  stat /home/user1/cat-setuid >> /root/mephi-linux-security-2026/stat.out
+   30  ldd /usr/bin/cat
+   31  cp /usr/bin/cat /home/user1/cat-cap
+   32  chown user1:students /home/user1/cat-cap 
+   33  chmod 755 /home/user1/cat-cap
+   34  setcap cap_dac_read_search=ep /home/user1/cat-cap 
+   35  getcap /home/user1/cat-cap
+   36  getcap /home/user1/cat-cap > /root/mephi-linux-security-2026/getcap.out
+   37  cat /root/mephi-linux-security-2026/getcap.out 
+   38  stat /home/user1/cat-cap >> /root/mephi-linux-security-2026/stat.out
+   39  cat /root/mephi-linux-security-2026/stat.out 
+   40  command -v timedatectl 
+   41  visudo 
+   42  -c
+   43  sudo -l -U user1 
+   44  visudo 
+   45  ps aux | grep '[v]isudo'
+   46  fg
+   47  visudo -c
+   48  sudo -l -U user1 
+   49  cp /etc/sudoers /root/mephi-linux-security-2026/sudoers
+   50  ls -lh /root/mephi-linux-security-2026
+   51  echo 375027
+   52  gnome-screenshot -f /root/mephi-linux-security-2026/mephi-screenshot.png
+   53  echo 375027
+   54  gnome-screenshot -f /root/mephi-linux-security-2026/mephi-screenshot.png
+   55  ls -lh /root/mephi-linux-security-2026/mephi-screenshot.png 
+   56  history > /root/mephi-linux-security-2026/history.out
